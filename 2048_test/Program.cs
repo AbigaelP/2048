@@ -14,11 +14,46 @@ namespace _2048_test
             //Initialisé le tableau
             int[,] tableau2D = new int[4, 4];
 
-            // Une boucle while qui continue tant qu'il reste des 0 dans le tableau
-            //while (controle(tableau2D) == true){}
-            
+            // Créer une variable booléenne initialisée à true
+            bool mouve = true;
+
             // Afficher le tableau 2D
             AfficherTableau(tableau2D);
+
+            // Une boucle while qui continue tant qu'il reste des 0 dans le tableau
+            while (mouve && controle(tableau2D) == true)
+            {
+                //Détecter sur quelle touche l'utilisateur appuie
+                ConsoleKeyInfo keyInfo = Console.ReadKey();
+                ConsoleKey key = keyInfo.Key;
+
+                // Créer un switch pour les flèches directionnelles
+                switch (key)
+                {
+                    case ConsoleKey.UpArrow:
+                        //ici fonction du mouvemnets des tuiles
+                        break;
+                    case ConsoleKey.DownArrow:
+                        //ici fonction du mouvemnets des tuiles
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        //ici fonction du mouvemnets des tuiles
+                        break;
+                    case ConsoleKey.RightArrow:
+                        //ici fonction du mouvemnets des tuiles
+                        break;
+                    case ConsoleKey.C:
+                        // Arrêter le programme si la touche C est pressée
+                        mouve = false;
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        //Message par défaut si une autre touche est pressée
+                        Console.WriteLine("Appuyez sur une flèche directionnelle ou C pour arrêter.");
+                        break;
+                }
+            }
+            
             Console.ReadKey();
         }
 
