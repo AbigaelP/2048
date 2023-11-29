@@ -37,6 +37,7 @@ namespace _2048_test
                 {
                     case ConsoleKey.UpArrow:
                         //ici fonction du mouvemnets des tuiles
+                        tableau2D = haut(tableau2D);
                         //Générer un nombre éléatoire
                         aleatoire(tableau2D);
                         break;
@@ -70,6 +71,33 @@ namespace _2048_test
             
             Console.ReadKey();
         }
+
+        //fonction déplacer les chiffres en haut
+        static int[,] haut(int[,] tableau)
+        {
+            int x, y, z, w;
+            int[] haut = new int[4];
+
+            for (int colone = 0; colone < tableau.GetLength(1); colone++)
+            {
+                x = tableau[0, colone];
+                y = tableau[1, colone];
+                z = tableau[2, colone];
+                w = tableau[3, colone];
+
+                haut = changerOrdre(x, y, z, w); //haut[] veut dire qu'on parle d'une case en particulier, tout le tableau on ne met pas []
+
+                tableau[0, colone] = haut[0];
+                tableau[1, colone] = haut[1];
+                tableau[2, colone] = haut[2];
+                tableau[3, colone] = haut[3];
+
+            }
+
+            return tableau;
+
+        }
+
         //fonction déplacer les chiffres à droite
         static int[,] droite(int[,] tableau)
         {
