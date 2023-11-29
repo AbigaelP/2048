@@ -36,24 +36,26 @@ namespace _2048_test
                 switch (key)
                 {
                     case ConsoleKey.UpArrow:
-                        //ici fonction du mouvemnets des tuiles
+                        //fonction du mouvemnets des tuiles
                         tableau2D = haut(tableau2D);
                         //Générer un nombre éléatoire
                         aleatoire(tableau2D);
                         break;
                     case ConsoleKey.DownArrow:
-                        //ici fonction du mouvemnets des tuiles
+                        //fonction du mouvemnets des tuiles
+                        tableau2D = bas(tableau2D);
                         //Générer un nombre éléatoire
                         aleatoire(tableau2D);
                         break;
                     case ConsoleKey.LeftArrow:
-                        //ici fonction du mouvemnets des tuiles
+                        //fonction du mouvemnets des tuiles
                        tableau2D = gauche(tableau2D);
                         //Générer un nombre éléatoire
                         aleatoire(tableau2D);
                         break;
                     case ConsoleKey.RightArrow:
-                        //ici fonction du mouvemnets des tuiles
+                        //fonction du mouvemnets des tuiles
+                        tableau2D = droite(tableau2D);
                         //Générer un nombre éléatoire
                         aleatoire(tableau2D);
                         break;
@@ -70,6 +72,28 @@ namespace _2048_test
             }
             
             Console.ReadKey();
+        }
+        //fonction déplacer les chiffres en bas
+        static int[,] bas(int[,] tableau)
+        {
+            int x, y, z, w;
+            int[] bas = new int[4];
+
+            for(int colone = 0; colone < tableau.GetLength(1); colone++)
+            {
+                x = tableau[3, colone];
+                y = tableau[2, colone];
+                z = tableau[1, colone];
+                w = tableau[0, colone];
+                
+                bas = changerOrdre(x, y, z, w);
+
+                tableau[0, colone] = bas[3];
+                tableau[1, colone] = bas[2];
+                tableau[2, colone] = bas[1];
+                tableau[3, colone] = bas[0];
+            }
+            return tableau;
         }
 
         //fonction déplacer les chiffres en haut
