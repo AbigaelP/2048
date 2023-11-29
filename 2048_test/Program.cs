@@ -70,6 +70,29 @@ namespace _2048_test
             
             Console.ReadKey();
         }
+        //fonction déplacer les chiffres à droite
+        static int[,] droite(int[,] tableau)
+        {
+            int x, y, z, w;
+            int[] droite = new int[4];
+
+            for (int ligne = 0; ligne < tableau.GetLength(0); ligne++)
+            {
+                x = tableau[ligne, 3];
+                y = tableau[ligne, 2];
+                z = tableau[ligne, 1];
+                w = tableau[ligne, 0];
+
+                droite = changerOrdre(x, y, z, w);
+
+                tableau[ligne, 0] = droite[3];
+                tableau[ligne, 1] = droite[2];
+                tableau[ligne, 2] = droite[1];
+                tableau[ligne, 3] = droite[0];
+            }
+            return tableau;
+
+        }
 
         //fonction déplacer les chiffres à gauche
         static int[,] gauche(int[,] tableau)
