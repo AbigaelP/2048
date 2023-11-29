@@ -47,7 +47,7 @@ namespace _2048_test
                         break;
                     case ConsoleKey.LeftArrow:
                         //ici fonction du mouvemnets des tuiles
-                        gauche(tableau2D);
+                       tableau2D = gauche(tableau2D);
                         //Générer un nombre éléatoire
                         aleatoire(tableau2D);
                         break;
@@ -72,28 +72,32 @@ namespace _2048_test
         }
 
         //fonction déplacer les chiffres à gauche
-        static void gauche(int[,] tableau)
+        static int[,] gauche(int[,] tableau)
         {
+            int x, y, z, w;
             int[] gauche = new int[4];
 
-            for (int ligne =0; ligne<=tableau.GetLength(0); ligne++)
+            for (int ligne = 0; ligne < tableau.GetLength(0); ligne++)
             {
-                for (int colone = 0; colone <= tableau.GetLength(1); colone++)
-                {
-                    gauche[colone]= tableau[ligne, colone];
-                }
-                for(int x = 0; x < tableau.GetLength(1); x++)
-                {
-                    //fonctionne pas
-                }
-             
+                x = tableau[ligne, 0];
+                y = tableau[ligne, 1];
+                z = tableau[ligne, 2];
+                w = tableau[ligne, 3];
+
+                gauche = changerOrdre(x, y, z, w);
+
+                tableau[ligne, 0] = gauche[0];
+                tableau[ligne, 1] = gauche[1];
+                tableau[ligne, 2] = gauche[2];
+                tableau[ligne, 3] = gauche[3];
             }
+            return tableau;
             
         }
 
 
         //Fonction qui change l'ordre des nombres à gauche
-        static int[] changerOrdreGauche(int nb0, int nb1, int nb2, int nb3)
+        static int[] changerOrdre(int nb0, int nb1, int nb2, int nb3)
         {
 
             if (nb2 == 0 && nb3 > 0)
