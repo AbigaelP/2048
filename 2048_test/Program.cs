@@ -37,20 +37,24 @@ namespace _2048_test
                 {
                     case ConsoleKey.UpArrow:
                         //ici fonction du mouvemnets des tuiles
-                        //ici fonction généré 1 nombre éléatoire
+                        //Générer un nombre éléatoire
+                        aleatoire(tableau2D);
                         break;
                     case ConsoleKey.DownArrow:
                         //ici fonction du mouvemnets des tuiles
-                        //ici fonction généré 1 nombre éléatoire
+                        //Générer un nombre éléatoire
+                        aleatoire(tableau2D);
                         break;
                     case ConsoleKey.LeftArrow:
                         //ici fonction du mouvemnets des tuiles
                         gauche(tableau2D);
-                        //ici fonction généré 1 nombre éléatoire
+                        //Générer un nombre éléatoire
+                        aleatoire(tableau2D);
                         break;
                     case ConsoleKey.RightArrow:
                         //ici fonction du mouvemnets des tuiles
-                        //ici fonction généré 1 nombre éléatoire
+                        //Générer un nombre éléatoire
+                        aleatoire(tableau2D);
                         break;
                     case ConsoleKey.C:
                         // Arrêter le programme si la touche C est pressée
@@ -80,38 +84,39 @@ namespace _2048_test
                 }
                 for(int x = 0; x < tableau.GetLength(1); x++)
                 {
-                    tableau[ligne,x]= changerOrdreGauche(gauche[0], gauche[1], gauche[2], gauche[3]);
+                    //fonctionne pas
                 }
              
             }
             
         }
 
+
         //Fonction qui change l'ordre des nombres à gauche
-        static int[] changerOrdreGauche(int nombreZero, int nombreUn, int nombreDeux, int nombreTrois)
+        static int[] changerOrdreGauche(int nb0, int nb1, int nb2, int nb3)
         {
 
-            if (nombreDeux == 0 && nombreTrois > 0)
+            if (nb2 == 0 && nb3 > 0)
             {
-                nombreDeux = nombreTrois;
-                nombreTrois = 0;
+                nb2 = nb3;
+                nb3 = 0;
             }
 
-            if (nombreUn == 0 && nombreDeux > 0)
+            if (nb1 == 0 && nb2 > 0)
             {
-                nombreUn = nombreDeux;
-                nombreDeux = nombreTrois;
-                nombreTrois = 0;
+                nb1 = nb2;
+                nb2 = nb3;
+                nb3 = 0;
             }
 
-            if (nombreZero == 0 && nombreUn > 0)
+            if (nb0 == 0 && nb1 > 0)
             {
-                nombreZero = nombreUn;
-                nombreUn = nombreDeux;
-                nombreDeux = nombreTrois;
-                nombreTrois = 0;
+                nb0 = nb1;
+                nb1 = nb2;
+                nb2 = nb3;
+                nb3 = 0;
             }
-            int[] i = { nombreZero, nombreUn, nombreDeux, nombreTrois };
+            int[] i = { nb0, nb1, nb2, nb3 };
             return i;
         }
 
