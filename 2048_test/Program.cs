@@ -79,6 +79,9 @@ namespace _2048_test
             
             Console.ReadKey();
         }
+        
+
+
         //Fonction déplacer les chiffres (tuiles) vers le bas
         static int[,] bas(int[,] tableau)
         {
@@ -197,6 +200,7 @@ namespace _2048_test
         //Fonction qui change l'ordre des nombres à gauche
         static int[] changerOrdre(int nb0, int nb1, int nb2, int nb3)
         {
+           
             //interchanger deux valeurs numérique si un 0 est présent dans les valeurs
             if (nb2 == 0 && nb3 > 0)
             {
@@ -219,6 +223,26 @@ namespace _2048_test
                 nb3 = 0;
             }
 
+            //fusionner les tuiles si elles ont les memes valeurs 
+            if (nb0 == nb1)
+            { 
+                nb0 = nb0+nb1;
+                nb1 = nb2;
+                nb2 = nb3;
+                nb3 = 0;
+            }
+            if (nb1 == nb2)
+            {
+                nb1 = nb1 + nb2;
+                nb2 = nb3;
+                nb3 = 0;
+            }
+            if(nb2 == nb3)
+            {
+                nb2 = nb2 + nb3;
+                nb3 = 0;
+            }
+
             //nouveau tableu contenant le (ou les) 0 dans la (ou les) dernière position
             int[] i = { nb0, nb1, nb2, nb3 };
             return i;
@@ -231,7 +255,7 @@ namespace _2048_test
             int colone = tableau.GetLength(1);  //longueur de la dimmension y du tableau
 
             int aleatoireLigne = random.Next(0, 4);  //ligne aléatoire du tableau
-            int aleatoireColone = random.Next(0, 4);  //colone aléatoire du tableau
+            int aleatoireColone = random.Next(0, 4);  //colone aléatoire du tableau 
             int nombreAleatoire = random.Next(0, 10);  //généré un nombre aléatoire
 
             //met un chiffre aléatoire uniquement s'il ecrase un 0
