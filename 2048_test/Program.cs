@@ -80,7 +80,7 @@ namespace _2048_test
             Console.ReadKey();
         }
         
-
+        static int score =0;
 
         //Fonction déplacer les chiffres (tuiles) vers le bas
         static int[,] bas(int[,] tableau)
@@ -230,17 +230,20 @@ namespace _2048_test
                 nb1 = nb2;
                 nb2 = nb3;
                 nb3 = 0;
+                score += nb0; //calcule du score
             }
             if (nb1 == nb2)
             {
                 nb1 = nb1 + nb2;
                 nb2 = nb3;
                 nb3 = 0;
+                score += nb1;  //calcule du score
             }
             if(nb2 == nb3)
             {
                 nb2 = nb2 + nb3;
                 nb3 = 0;
+                score += nb2;  //calcule du score
             }
 
             //nouveau tableu contenant le (ou les) 0 dans la (ou les) dernière position
@@ -273,11 +276,13 @@ namespace _2048_test
                 }
                
                 Console.Clear();
-                Console.WriteLine();
+                Console.WriteLine("******************************");
 
                 AfficherTableau(tableau);
 
-                Console.WriteLine();
+                //Afficher le score
+                Console.WriteLine("Le score est de : " + score.ToString());
+                Console.WriteLine("******************************");
             }
 
             //le chiffre écrasé n'est pas un 0 alors on recommence au début de la fonction
@@ -327,6 +332,7 @@ namespace _2048_test
                 }
 
                 // Passer à la ligne suivante après chaque ligne du tableau
+                Console.WriteLine();
                 Console.WriteLine();
             }
         }
