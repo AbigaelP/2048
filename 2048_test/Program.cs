@@ -17,6 +17,9 @@ namespace _2048_test
         //définir l'aléatoire en dehors du void main pour gagner de la rapidité
         static Random random = new Random();
 
+        //déclarer le score
+        static int score = 0;
+
         static void Main(string[] args)
         {
             //Initialisé le tableau 4 par 4
@@ -80,7 +83,6 @@ namespace _2048_test
             Console.ReadKey();
         }
         
-        static int score =0;
 
         //Fonction déplacer les chiffres (tuiles) vers le bas
         static int[,] bas(int[,] tableau)
@@ -226,7 +228,7 @@ namespace _2048_test
             //fusionner les tuiles si elles ont les memes valeurs 
             if (nb0 == nb1 && nb0 != 0)
             { 
-                nb0 = nb0+nb1;
+                nb0 = nb0+nb1; // +=nb1
                 nb1 = nb2;
                 nb2 = nb3;
                 nb3 = 0;
