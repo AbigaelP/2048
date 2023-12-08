@@ -224,7 +224,7 @@ namespace _2048_test
             }
 
             //fusionner les tuiles si elles ont les memes valeurs 
-            if (nb0 == nb1)
+            if (nb0 == nb1 && nb0 != 0)
             { 
                 nb0 = nb0+nb1;
                 nb1 = nb2;
@@ -232,14 +232,14 @@ namespace _2048_test
                 nb3 = 0;
                 score += nb0; //calcule du score
             }
-            if (nb1 == nb2)
+            if (nb1 == nb2 && nb1!= 0)
             {
                 nb1 = nb1 + nb2;
                 nb2 = nb3;
                 nb3 = 0;
                 score += nb1;  //calcule du score
             }
-            if(nb2 == nb3)
+            if(nb2 == nb3 && nb2 != 0)
             {
                 nb2 = nb2 + nb3;
                 nb3 = 0;
