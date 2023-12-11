@@ -23,6 +23,8 @@ namespace _2048_test
         //déclarer la victoire
         static bool gagner = false;
 
+        static bool controleMouvements = false;
+
         static void Main(string[] args)
         {
             //Initialisé le tableau 4 par 4
@@ -53,26 +55,18 @@ namespace _2048_test
                     case ConsoleKey.UpArrow:
                         //Fonction du mouvements des tuiles vers le haut
                         tableau2D = haut(tableau2D);
-                        //Générer un nombre aléatoire après le mouvement
-                        aleatoire(tableau2D);
                         break;
                     case ConsoleKey.DownArrow:
                         //Fonction du mouvements des tuiles vers le bas
                         tableau2D = bas(tableau2D);
-                        //Générer un nombre aléatoire
-                        aleatoire(tableau2D);
                         break;
                     case ConsoleKey.LeftArrow:
                         //Fonction du mouvements des tuiles vers la gauche
                        tableau2D = gauche(tableau2D);
-                        //Générer un nombre aléatoire
-                        aleatoire(tableau2D);
                         break;
                     case ConsoleKey.RightArrow:
                         //Fonction du mouvements des tuiles vers la droite
                         tableau2D = droite(tableau2D);
-                        //Générer un nombre aléatoire
-                        aleatoire(tableau2D);
                         break;
                     case ConsoleKey.C:
                         // Arrêter le programme si la touche C est pressée
@@ -84,6 +78,16 @@ namespace _2048_test
                         Console.WriteLine("Appuyez sur une flèche directionnelle ou C pour arrêter.");
                         break;
                 }
+                
+                //Générer un nombre aléatoire après le mouvement
+                if (controleMouvements)
+                {
+                    aleatoire(tableau2D);
+                }
+
+                AfficherTableau(tableau2D);
+                controleMouvements = false;
+
             }
             
             Console.ReadKey();
@@ -226,12 +230,13 @@ namespace _2048_test
         //Fonction qui change l'ordre des nombres à gauche
         static int[] changerOrdre(int nb0, int nb1, int nb2, int nb3)
         {
-           
+            
             //interchanger deux valeurs numérique si un 0 est présent dans les valeurs
             if (nb2 == 0 && nb3 > 0)
             {
                 nb2 = nb3;
                 nb3 = 0;
+                controleMouvements = true;
             }
 
             if (nb1 == 0 && nb2 > 0)
@@ -239,6 +244,7 @@ namespace _2048_test
                 nb1 = nb2;
                 nb2 = nb3;
                 nb3 = 0;
+                controleMouvements = true;
             }
 
             if (nb0 == 0 && nb1 > 0)
@@ -247,6 +253,7 @@ namespace _2048_test
                 nb1 = nb2;
                 nb2 = nb3;
                 nb3 = 0;
+                controleMouvements = true;
             }
 
             //fusionner les tuiles si elles ont les memes valeurs 
@@ -257,6 +264,7 @@ namespace _2048_test
                 nb2 = nb3;
                 nb3 = 0;
                 score += nb0; //calcule du score
+                controleMouvements = true;
             }
             if (nb1 == nb2 && nb1!= 0)
             {
@@ -264,12 +272,14 @@ namespace _2048_test
                 nb2 = nb3;
                 nb3 = 0;
                 score += nb1;  //calcule du score
+                controleMouvements = true;
             }
             if(nb2 == nb3 && nb2 != 0)
             {
                 nb2 = nb2 + nb3;
                 nb3 = 0;
                 score += nb2;  //calcule du score
+                controleMouvements = true;
             }
 
             //nouveau tableu contenant le (ou les) 0 dans la (ou les) dernière position
