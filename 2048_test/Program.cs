@@ -20,6 +20,9 @@ namespace _2048_test
         //déclarer le score
         static int score = 0;
 
+        //déclarer la victoire
+        static bool gagner = false;
+
         static void Main(string[] args)
         {
             //Initialisé le tableau 4 par 4
@@ -86,6 +89,24 @@ namespace _2048_test
             Console.ReadKey();
         }
         
+        static bool controleGagner(int [,] tableau)
+        {
+            int ligne = tableau.GetLength(0);  //longueur de la dimmension x du tableau
+            int colone = tableau.GetLength(1);  //longueur de la dimmension y du tableau
+
+            for (int i = 0; i < ligne; i++)
+            {
+                for (int j = 0; j < colone; j++)
+                {
+                    if (tableau[i,j] == 2048)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
 
         //Fonction déplacer les chiffres (tuiles) vers le bas
         static int[,] bas(int[,] tableau)
@@ -291,6 +312,7 @@ namespace _2048_test
             }
         }
 
+        //méthode qui controle si deux nombre sont identique
         static bool controlePerdu (int nb0, int nb1, int nb2, int nb3)
         {
             if (nb0 == nb1)
@@ -317,6 +339,18 @@ namespace _2048_test
             int ligne = tableau.GetLength(0);  //longueur de la dimmension x du tableau
             int colone = tableau.GetLength(1);  //longueur de la dimmension y du tableau
             
+
+            while (!gagner)
+            {
+                gagner = controleGagner(tableau);
+                if (gagner)
+                {
+                    Console.WriteLine("Bravo vous avez gagné! Appyer sur C pour quitter ou sur les flèches pour continuer à jouer");
+                }
+                break;
+            }
+            
+
 
             // Parcourir les lignes du tableau
             for (int i = 0; i < ligne; i++)
