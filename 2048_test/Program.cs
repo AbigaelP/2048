@@ -33,7 +33,10 @@ namespace _2048_test
             {
                 aleatoire(tableau2D);
             }
-            
+
+            AfficherTableau(tableau2D);
+
+            //tableau2D[0, 0] = 1024; tableau2D[1,0] = 1024;
             //Une boucle while qui continue tant qu'il reste des 0 dans le tableau et que les variables booléennes restent sur true
             while (jeu && controle(tableau2D) == true)
             {
@@ -277,14 +280,7 @@ namespace _2048_test
                     tableau[aleatoireLigne, aleatoireColone] = 2;         //affiche un 2 dans le tableau
                 }
                
-                Console.Clear();
-                Console.WriteLine("******************************");
-
-                AfficherTableau(tableau);
-
-                //Afficher le score
-                Console.WriteLine("Le score est de : " + score.ToString());
-                Console.WriteLine("******************************");
+                
 
             }
 
@@ -355,6 +351,9 @@ namespace _2048_test
             int ligne = tableau.GetLength(0);  //longueur de la dimmension x du tableau
             int colone = tableau.GetLength(1); //longueur de la dimmension y du tableau
 
+            Console.Clear();
+            Console.WriteLine("******************************");
+
             // Parcourir les lignes du tableau
             for (int i = 0; i < ligne; i++)
             {
@@ -369,6 +368,10 @@ namespace _2048_test
                 Console.WriteLine();
                 Console.WriteLine();
             }
+
+            //Afficher le score
+            Console.WriteLine("Le score est de : " + score.ToString());
+            Console.WriteLine("******************************");
         }
 
     }
