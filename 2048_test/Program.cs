@@ -374,17 +374,19 @@ namespace _2048_test
 
                     }
                 }
+                //controle si deux nombres dans une ligne sont identique
                 if (controlePerdu(tableau[i,0], tableau[i, 1], tableau[i, 2], tableau[i, 3]))
                 {
-                    return true;
+                    return true; //permet de continuer à jouer
                 }
+                //contrôle si deux nombres sont identique dans une colone
                 if (controlePerdu(tableau[0, i], tableau[1, i], tableau[2, i], tableau[3, i]))
                 {
-                    return true;
+                    return true; //permet de continuer à jouer
                 }
             }
-            //on retourne false quand il n'y a plus de 0 dans le tableau
-
+            //on retourne false quand il n'y a plus de 0 dans le tableau ou deux nombres identiques contigües qui se suivent
+            //on a perdu la game
             Console.WriteLine("Vous avez malheureusmeent perdu!");
             return false;
         }
