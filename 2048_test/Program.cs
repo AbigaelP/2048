@@ -33,8 +33,7 @@ namespace _2048_test
             {
                 aleatoire(tableau2D);
             }
-            tableau2D[3, 3] = 0;
-            AfficherTableau(tableau2D);
+            
             //Une boucle while qui continue tant qu'il reste des 0 dans le tableau et que les variables booléennes restent sur true
             while (jeu && controle(tableau2D) == true)
             {
