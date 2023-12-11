@@ -33,7 +33,8 @@ namespace _2048_test
             {
                 aleatoire(tableau2D);
             }
-
+            tableau2D[3, 3] = 0;
+            AfficherTableau(tableau2D);
             //Une boucle while qui continue tant qu'il reste des 0 dans le tableau et que les variables booléennes restent sur true
             while (jeu && controle(tableau2D) == true)
             {
@@ -285,6 +286,7 @@ namespace _2048_test
                 //Afficher le score
                 Console.WriteLine("Le score est de : " + score.ToString());
                 Console.WriteLine("******************************");
+
             }
 
             //le chiffre écrasé n'est pas un 0 alors on recommence au début de la fonction
@@ -294,11 +296,32 @@ namespace _2048_test
             }
         }
 
+        static bool controlePerdu (int nb0, int nb1, int nb2, int nb3)
+        {
+            if (nb0 == nb1)
+            {
+                return true;
+            }
+            else if (nb1 == nb2)
+            {
+                return true;
+            }
+            else if (nb2 == nb3 )
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         // Fonction booléenne qui controle s'il reste un 0 dans le tableau
         static bool controle(int[,] tableau)
         {
             int ligne = tableau.GetLength(0);  //longueur de la dimmension x du tableau
             int colone = tableau.GetLength(1);  //longueur de la dimmension y du tableau
+            
 
             // Parcourir les lignes du tableau
             for (int i = 0; i < ligne; i++)
@@ -309,11 +332,21 @@ namespace _2048_test
                     if (tableau[i, j] == 0)
                     {
                         return true;   //s'il reste un 0 dans le tableau, on retourne true
+
                     }
+                }
+                if (controlePerdu(tableau[i,0], tableau[i, 1], tableau[i, 2], tableau[i, 3]))
+                {
+                    return true;
+                }
+                if (controlePerdu(tableau[0, i], tableau[1, i], tableau[2, i], tableau[3, i]))
+                {
+                    return true;
                 }
             }
             //on retourne false quand il n'y a plus de 0 dans le tableau
-            Console.WriteLine("Le tableau est plein");
+
+            Console.WriteLine("Vous avez malheureusmeent perdu!");
             return false;
         }
 
