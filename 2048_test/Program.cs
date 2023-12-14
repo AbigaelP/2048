@@ -10,7 +10,7 @@ namespace _2048_test
      * Auteur: Abigaël Périsset
      * Date début: 23.11.2023
      * Date fin: 30.11.2023
-     * Description: Déplacer des nombres positionner aléatoirement dans un tableau dans 4 directions distinctes.
+     * Description: Déplacer des nombres positionner aléatoirement dans un tableau dans 4 directions distinctes et les fusionné : faire un 2028
      */
     internal class Program
     {
@@ -34,7 +34,7 @@ namespace _2048_test
             bool jeu = true;
 
             //Mettre deux nombre aléatoire
-            for (int p =0; p <=1; p++)
+            for (int p = 0; p <= 1; p++)
             {
                 aleatoire(tableau2D);
             }
@@ -62,7 +62,7 @@ namespace _2048_test
                         break;
                     case ConsoleKey.LeftArrow:
                         //Fonction du mouvements des tuiles vers la gauche
-                       tableau2D = gauche(tableau2D);
+                        tableau2D = gauche(tableau2D);
                         break;
                     case ConsoleKey.RightArrow:
                         //Fonction du mouvements des tuiles vers la droite
@@ -78,7 +78,7 @@ namespace _2048_test
                         Console.WriteLine("Appuyez sur une flèche directionnelle ou C pour arrêter.");
                         break;
                 }
-                
+
                 //Générer un nombre aléatoire après le mouvement
                 if (controleMouvements)
                 {
@@ -89,11 +89,11 @@ namespace _2048_test
                 controleMouvements = false;
 
             }
-            
+
             Console.ReadKey();
         }
-        
-        static bool controleGagner(int [,] tableau)
+
+        static bool controleGagner(int[,] tableau)
         {
             int ligne = tableau.GetLength(0);  //longueur de la dimmension x du tableau
             int colone = tableau.GetLength(1);  //longueur de la dimmension y du tableau
@@ -102,7 +102,7 @@ namespace _2048_test
             {
                 for (int j = 0; j < colone; j++)
                 {
-                    if (tableau[i,j] == 2048)
+                    if (tableau[i, j] == 2048)
                     {
                         return true;
                     }
@@ -116,17 +116,17 @@ namespace _2048_test
         static int[,] bas(int[,] tableau)
         {
             int x, y, z, w;             //variable de position
-            int[] bas = new int[4];     
+            int[] bas = new int[4];
 
             //Passer dans chaques colones pour stocker les valeur des lignes et les manipuler
-            for(int colone = 0; colone < tableau.GetLength(1); colone++) 
+            for (int colone = 0; colone < tableau.GetLength(1); colone++)
             {
                 //stocker les valeurs des lignes
                 x = tableau[3, colone];
                 y = tableau[2, colone];
                 z = tableau[1, colone];
                 w = tableau[0, colone];
-                
+
                 //changer l'ordre des numéros
                 bas = changerOrdre(x, y, z, w);
 
@@ -223,14 +223,14 @@ namespace _2048_test
             }
             //retourner le tableau complet avec les numéros != 0 à gauche
             return tableau;
-            
+
         }
 
 
         //Fonction qui change l'ordre des nombres à gauche
         static int[] changerOrdre(int nb0, int nb1, int nb2, int nb3)
         {
-            
+
             //interchanger deux valeurs numérique si un 0 est présent dans les valeurs
             if (nb2 == 0 && nb3 > 0)
             {
@@ -258,15 +258,15 @@ namespace _2048_test
 
             //fusionner les tuiles si elles ont les memes valeurs 
             if (nb0 == nb1 && nb0 != 0)
-            { 
-                nb0 = nb0+nb1; // +=nb1
+            {
+                nb0 = nb0 + nb1; // +=nb1
                 nb1 = nb2;
                 nb2 = nb3;
                 nb3 = 0;
                 score += nb0; //calcule du score
                 controleMouvements = true;
             }
-            if (nb1 == nb2 && nb1!= 0)
+            if (nb1 == nb2 && nb1 != 0)
             {
                 nb1 = nb1 + nb2;
                 nb2 = nb3;
@@ -274,7 +274,7 @@ namespace _2048_test
                 score += nb1;  //calcule du score
                 controleMouvements = true;
             }
-            if(nb2 == nb3 && nb2 != 0)
+            if (nb2 == nb3 && nb2 != 0)
             {
                 nb2 = nb2 + nb3;
                 nb3 = 0;
@@ -310,20 +310,20 @@ namespace _2048_test
                 {
                     tableau[aleatoireLigne, aleatoireColone] = 2;         //affiche un 2 dans le tableau
                 }
-               
-                
+
+
 
             }
 
             //le chiffre écrasé n'est pas un 0 alors on recommence au début de la fonction
             else
             {
-               aleatoire(tableau);
+                aleatoire(tableau);
             }
         }
 
         //méthode qui controle si deux nombre sont identique
-        static bool controlePerdu (int nb0, int nb1, int nb2, int nb3)
+        static bool controlePerdu(int nb0, int nb1, int nb2, int nb3)
         {
             if (nb0 == nb1)
             {
@@ -333,7 +333,7 @@ namespace _2048_test
             {
                 return true;
             }
-            else if (nb2 == nb3 )
+            else if (nb2 == nb3)
             {
                 return true;
             }
@@ -348,7 +348,7 @@ namespace _2048_test
         {
             int ligne = tableau.GetLength(0);  //longueur de la dimmension x du tableau
             int colone = tableau.GetLength(1);  //longueur de la dimmension y du tableau
-            
+
 
             while (!gagner)
             {
@@ -359,7 +359,7 @@ namespace _2048_test
                 }
                 break;
             }
-            
+
 
 
             // Parcourir les lignes du tableau
@@ -375,7 +375,7 @@ namespace _2048_test
                     }
                 }
                 //controle si deux nombres dans une ligne sont identique
-                if (controlePerdu(tableau[i,0], tableau[i, 1], tableau[i, 2], tableau[i, 3]))
+                if (controlePerdu(tableau[i, 0], tableau[i, 1], tableau[i, 2], tableau[i, 3]))
                 {
                     return true; //permet de continuer à jouer
                 }
@@ -406,8 +406,12 @@ namespace _2048_test
                 // Parcourir les colonnes du tableau
                 for (int j = 0; j < colone; j++)
                 {
+                    // Mettre le chiffre en couleur
+                    Console.ForegroundColor = couleur(tableau[i, j]);
                     // Afficher la valeur à la position (i, j)
                     Console.Write(tableau[i, j] + "\t");
+                    // Mettre par défaut la couleur du texte (en blanc)
+                    Console.ResetColor();
                 }
 
                 // Passer à la ligne suivante après chaque ligne du tableau
@@ -419,6 +423,39 @@ namespace _2048_test
             Console.WriteLine("Le score est de : " + score.ToString());
             Console.WriteLine("******************************");
         }
+
+        //Méthode pour afficher les chiffres de la grilles en couleur
+        static ConsoleColor couleur (int chiffre)
+        {
+            switch (chiffre)
+            {
+                case 2:
+                    return ConsoleColor.Green;
+                case 4: 
+                    return ConsoleColor.Blue;
+                case 8:
+                    return ConsoleColor.Red;
+                case 16:
+                    return ConsoleColor.Magenta;
+                case 32:
+                    return ConsoleColor.Yellow;
+                case 64:
+                    return ConsoleColor.Cyan;
+                case 128:
+                    return ConsoleColor.DarkBlue;
+                case 256:
+                    return ConsoleColor.Gray;
+                case 512:
+                    return ConsoleColor.DarkRed;
+                case 1024:
+                    return ConsoleColor.DarkGreen;
+                case 2048:
+                    return ConsoleColor.DarkYellow;
+                default:
+                    return ConsoleColor.White;
+            }
+        }
+
 
     }
 }
