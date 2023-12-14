@@ -14,34 +14,36 @@ namespace _2048_test
      */
     internal class Program
     {
-        //définir l'aléatoire en dehors du void main pour gagner de la rapidité
+        // Définir l'aléatoire en dehors du void main pour gagner de la rapidité
         static Random random = new Random();
 
-        //déclarer le score
+        // Déclarer le score
         static int score = 0;
 
-        //déclarer la victoire
+        // Déclarer la victoire
         static bool gagner = false;
 
+        // Déclarer le mouvement
         static bool controleMouvements = false;
 
         static void Main(string[] args)
         {
-            //Initialisé le tableau 4 par 4
+            // Initialisé le tableau 4 par 4
             int[,] tableau2D = new int[4, 4];
 
-            //Créer une variable booléenne initialisée à true
+            // Créer une variable booléenne initialisée à true
             bool jeu = true;
 
-            //Mettre deux nombre aléatoire
+            // Mettre deux nombre aléatoire
             for (int p = 0; p <= 1; p++)
             {
                 aleatoire(tableau2D);
             }
-
+           
             AfficherTableau(tableau2D);
 
             //tableau2D[0, 0] = 1024; tableau2D[1,0] = 1024;
+
             //Une boucle while qui continue tant qu'il reste des 0 dans le tableau et que les variables booléennes restent sur true
             while (jeu && controle(tableau2D) == true)
             {
@@ -84,8 +86,10 @@ namespace _2048_test
                 {
                     aleatoire(tableau2D);
                 }
-
+                // Afficher le tableau
                 AfficherTableau(tableau2D);
+
+                // Mettre le mouvements à false
                 controleMouvements = false;
 
             }
@@ -93,6 +97,7 @@ namespace _2048_test
             Console.ReadKey();
         }
 
+        // Méthode qui controle si une case èà le nombre 2048
         static bool controleGagner(int[,] tableau)
         {
             int ligne = tableau.GetLength(0);  //longueur de la dimmension x du tableau
@@ -104,12 +109,12 @@ namespace _2048_test
                 {
                     if (tableau[i, j] == 2048)
                     {
-                        return true;
+                        return true; // si 2028 est présent on return true
                     }
                 }
             }
 
-            return false;
+            return false; // aucun 2048 dans les tuiles
         }
 
         //Fonction déplacer les chiffres (tuiles) vers le bas
@@ -175,7 +180,7 @@ namespace _2048_test
             int x, y, z, w;                 //variable de position
             int[] droite = new int[4];
 
-            //Passer dans chaques lignes pour stocker les valeur des colones et les manipuler
+            // Passer dans chaques lignes pour stocker les valeur des colones et les manipuler
             for (int ligne = 0; ligne < tableau.GetLength(0); ligne++)
             {
                 //stocker les valeurs des colones
@@ -236,7 +241,7 @@ namespace _2048_test
             {
                 nb2 = nb3;
                 nb3 = 0;
-                controleMouvements = true;
+                controleMouvements = true; //controler si le mouvements a eu lieu
             }
 
             if (nb1 == 0 && nb2 > 0)
@@ -244,7 +249,7 @@ namespace _2048_test
                 nb1 = nb2;
                 nb2 = nb3;
                 nb3 = 0;
-                controleMouvements = true;
+                controleMouvements = true; //controler si le mouvements a eu lieu
             }
 
             if (nb0 == 0 && nb1 > 0)
@@ -253,7 +258,7 @@ namespace _2048_test
                 nb1 = nb2;
                 nb2 = nb3;
                 nb3 = 0;
-                controleMouvements = true;
+                controleMouvements = true; //controler si le mouvements a eu lieu
             }
 
             //fusionner les tuiles si elles ont les memes valeurs 
@@ -264,7 +269,7 @@ namespace _2048_test
                 nb2 = nb3;
                 nb3 = 0;
                 score += nb0; //calcule du score
-                controleMouvements = true;
+                controleMouvements = true; //controle si le mouvements de la fusion a eu lieu
             }
             if (nb1 == nb2 && nb1 != 0)
             {
@@ -272,14 +277,14 @@ namespace _2048_test
                 nb2 = nb3;
                 nb3 = 0;
                 score += nb1;  //calcule du score
-                controleMouvements = true;
+                controleMouvements = true; //controle si le mouvements de la fusion a eu lieu
             }
             if (nb2 == nb3 && nb2 != 0)
             {
                 nb2 = nb2 + nb3;
                 nb3 = 0;
                 score += nb2;  //calcule du score
-                controleMouvements = true;
+                controleMouvements = true; //controle si le mouvements de la fusion a eu lieu
             }
 
             //nouveau tableu contenant le (ou les) 0 dans la (ou les) dernière position
@@ -310,9 +315,6 @@ namespace _2048_test
                 {
                     tableau[aleatoireLigne, aleatoireColone] = 2;         //affiche un 2 dans le tableau
                 }
-
-
-
             }
 
             //le chiffre écrasé n'est pas un 0 alors on recommence au début de la fonction
@@ -343,13 +345,13 @@ namespace _2048_test
             }
         }
 
-        // Fonction booléenne qui controle s'il reste un 0 dans le tableau
+        // Fonction booléenne qui controle s'il reste un 0 dans le tableau ou si il y a un chiffre a 2028 ou s'il ont a perdu la game (plus de mouvements possible)
         static bool controle(int[,] tableau)
         {
             int ligne = tableau.GetLength(0);  //longueur de la dimmension x du tableau
             int colone = tableau.GetLength(1);  //longueur de la dimmension y du tableau
 
-
+            //controle si on a gagner: s'il y a un 2048 dans les tuiles
             while (!gagner)
             {
                 gagner = controleGagner(tableau);
