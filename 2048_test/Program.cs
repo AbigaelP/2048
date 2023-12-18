@@ -26,6 +26,7 @@ namespace _2048_test
         // Déclarer le mouvement
         static bool controleMouvements = false;
 
+
         static void Main(string[] args)
         {
             // Initialisé le tableau 4 par 4
@@ -98,7 +99,7 @@ namespace _2048_test
         }
 
         // Méthode qui controle si une case èà le nombre 2048
-        static bool controleGagner(int[,] tableau)
+        static bool ControleGagner(int[,] tableau)
         {
             int ligne = tableau.GetLength(0);  //longueur de la dimmension x du tableau
             int colone = tableau.GetLength(1);  //longueur de la dimmension y du tableau
@@ -354,7 +355,7 @@ namespace _2048_test
             //controle si on a gagner: s'il y a un 2048 dans les tuiles
             while (!gagner)
             {
-                gagner = controleGagner(tableau);
+                gagner = ControleGagner(tableau);
                 if (gagner)
                 {
                     Console.WriteLine("Bravo vous avez gagné! Appyer sur C pour quitter ou sur les flèches pour continuer à jouer");
