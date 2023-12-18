@@ -26,27 +26,26 @@ namespace _2048_test
         // Déclarer le mouvement
         static bool controleMouvements = false;
 
+        // Initialisé le tableau 4 par 4
+        static int[,] tableau = new int[4, 4];
 
         static void Main(string[] args)
         {
-            // Initialisé le tableau 4 par 4
-            int[,] tableau = new int[4, 4];
-
             // Créer une variable booléenne initialisée à true
             bool jeu = true;
 
             // Mettre deux nombre aléatoire
             for (int p = 0; p <= 1; p++)
             {
-                Aleatoire(tableau);
+                Aleatoire();
             }
            
-            AfficherTableau(tableau);
+            AfficherTableau();
 
             //tableau2D[0, 0] = 1024; tableau2D[1,0] = 1024;
 
             //Une boucle while qui continue tant qu'il reste des 0 dans le tableau et que les variables booléennes restent sur true
-            while (jeu && Controle(tableau))
+            while (jeu && Controle())
             {
                 //Détecter sur quelle touche l'utilisateur appuie
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
@@ -57,19 +56,19 @@ namespace _2048_test
                 {
                     case ConsoleKey.UpArrow:
                         //Fonction du mouvements des tuiles vers le haut
-                        tableau = Haut(tableau);
+                        tableau = Haut();
                         break;
                     case ConsoleKey.DownArrow:
                         //Fonction du mouvements des tuiles vers le bas
-                        tableau = Bas(tableau);
+                        tableau = Bas();
                         break;
                     case ConsoleKey.LeftArrow:
                         //Fonction du mouvements des tuiles vers la gauche
-                        tableau = Gauche(tableau);
+                        tableau = Gauche();
                         break;
                     case ConsoleKey.RightArrow:
                         //Fonction du mouvements des tuiles vers la droite
-                        tableau = Droite(tableau);
+                        tableau = Droite();
                         break;
                     case ConsoleKey.C:
                         // Arrêter le programme si la touche C est pressée
@@ -85,10 +84,10 @@ namespace _2048_test
                 //Générer un nombre aléatoire après le mouvement
                 if (controleMouvements)
                 {
-                    Aleatoire(tableau);
+                    Aleatoire();
                 }
                 // Afficher le tableau
-                AfficherTableau(tableau);
+                AfficherTableau();
 
                 // Mettre le mouvements à false
                 controleMouvements = false;
@@ -99,7 +98,7 @@ namespace _2048_test
         }
 
         // Méthode qui controle si une case èà le nombre 2048
-        static bool ControleGagner(int[,] tableau)
+        static bool ControleGagner()
         {
             int ligne = tableau.GetLength(0);  //longueur de la dimmension x du tableau
             int colone = tableau.GetLength(1);  //longueur de la dimmension y du tableau
@@ -119,7 +118,7 @@ namespace _2048_test
         }
 
         //Fonction déplacer les chiffres (tuiles) vers le bas
-        static int[,] Bas(int[,] tableau)
+        static int[,] Bas()
         {
             int x, y, z, w;             //variable de position
             int[] bas = new int[4];
@@ -146,7 +145,7 @@ namespace _2048_test
         }
 
         //fonction déplacer les chiffres en haut
-        static int[,] Haut(int[,] tableau)
+        static int[,] Haut()
         {
             int x, y, z, w;             //variable de position
             int[] haut = new int[4];
@@ -176,7 +175,7 @@ namespace _2048_test
         }
 
         //fonction déplacer les chiffres à droite
-        static int[,] Droite(int[,] tableau)
+        static int[,] Droite()
         {
             int x, y, z, w;                 //variable de position
             int[] droite = new int[4];
@@ -205,7 +204,7 @@ namespace _2048_test
         }
 
         //fonction déplacer les chiffres à gauche
-        static int[,] Gauche(int[,] tableau)
+        static int[,] Gauche()
         {
             int x, y, z, w;                 //variable de position
             int[] gauche = new int[4];
@@ -294,7 +293,7 @@ namespace _2048_test
         }
 
         //fonction générer un nombre aléatoire dans le tableau
-        static void Aleatoire(int[,] tableau)
+        static void Aleatoire()
         {
             int ligne = tableau.GetLength(0);   //longueur de la dimmension x du tableau
             int colone = tableau.GetLength(1);  //longueur de la dimmension y du tableau
@@ -321,7 +320,7 @@ namespace _2048_test
             //le chiffre écrasé n'est pas un 0 alors on recommence au début de la fonction
             else
             {
-                Aleatoire(tableau);
+                Aleatoire();
             }
         }
 
@@ -347,7 +346,7 @@ namespace _2048_test
         }
 
         // Fonction booléenne qui controle s'il reste un 0 dans le tableau ou si il y a un chiffre a 2028 ou s'il ont a perdu la game (plus de mouvements possible)
-        static bool Controle(int[,] tableau)
+        static bool Controle()
         {
             int ligne = tableau.GetLength(0);  //longueur de la dimmension x du tableau
             int colone = tableau.GetLength(1);  //longueur de la dimmension y du tableau
@@ -355,7 +354,7 @@ namespace _2048_test
             //controle si on a gagner: s'il y a un 2048 dans les tuiles
             while (!gagner)
             {
-                gagner = ControleGagner(tableau);
+                gagner = ControleGagner();
                 if (gagner)
                 {
                     Console.WriteLine("Bravo vous avez gagné! Appyer sur C pour quitter ou sur les flèches pour continuer à jouer");
@@ -395,7 +394,7 @@ namespace _2048_test
         }
 
         //Fonction pour afficher un tableau 2D
-        static void AfficherTableau(int[,] tableau)
+        static void AfficherTableau()
         {
             int ligne = tableau.GetLength(0);  //longueur de la dimmension x du tableau
             int colone = tableau.GetLength(1); //longueur de la dimmension y du tableau
