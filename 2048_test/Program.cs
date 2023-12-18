@@ -29,7 +29,7 @@ namespace _2048_test
         static void Main(string[] args)
         {
             // Initialisé le tableau 4 par 4
-            int[,] tableau2D = new int[4, 4];
+            int[,] tableau = new int[4, 4];
 
             // Créer une variable booléenne initialisée à true
             bool jeu = true;
@@ -37,15 +37,15 @@ namespace _2048_test
             // Mettre deux nombre aléatoire
             for (int p = 0; p <= 1; p++)
             {
-                aleatoire(tableau2D);
+                Aleatoire(tableau);
             }
            
-            AfficherTableau(tableau2D);
+            AfficherTableau(tableau);
 
             //tableau2D[0, 0] = 1024; tableau2D[1,0] = 1024;
 
             //Une boucle while qui continue tant qu'il reste des 0 dans le tableau et que les variables booléennes restent sur true
-            while (jeu && controle(tableau2D) == true)
+            while (jeu && Controle(tableau))
             {
                 //Détecter sur quelle touche l'utilisateur appuie
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
@@ -56,19 +56,19 @@ namespace _2048_test
                 {
                     case ConsoleKey.UpArrow:
                         //Fonction du mouvements des tuiles vers le haut
-                        tableau2D = haut(tableau2D);
+                        tableau = Haut(tableau);
                         break;
                     case ConsoleKey.DownArrow:
                         //Fonction du mouvements des tuiles vers le bas
-                        tableau2D = bas(tableau2D);
+                        tableau = Bas(tableau);
                         break;
                     case ConsoleKey.LeftArrow:
                         //Fonction du mouvements des tuiles vers la gauche
-                        tableau2D = gauche(tableau2D);
+                        tableau = Gauche(tableau);
                         break;
                     case ConsoleKey.RightArrow:
                         //Fonction du mouvements des tuiles vers la droite
-                        tableau2D = droite(tableau2D);
+                        tableau = Droite(tableau);
                         break;
                     case ConsoleKey.C:
                         // Arrêter le programme si la touche C est pressée
@@ -84,10 +84,10 @@ namespace _2048_test
                 //Générer un nombre aléatoire après le mouvement
                 if (controleMouvements)
                 {
-                    aleatoire(tableau2D);
+                    Aleatoire(tableau);
                 }
                 // Afficher le tableau
-                AfficherTableau(tableau2D);
+                AfficherTableau(tableau);
 
                 // Mettre le mouvements à false
                 controleMouvements = false;
@@ -118,7 +118,7 @@ namespace _2048_test
         }
 
         //Fonction déplacer les chiffres (tuiles) vers le bas
-        static int[,] bas(int[,] tableau)
+        static int[,] Bas(int[,] tableau)
         {
             int x, y, z, w;             //variable de position
             int[] bas = new int[4];
@@ -133,7 +133,7 @@ namespace _2048_test
                 w = tableau[0, colone];
 
                 //changer l'ordre des numéros
-                bas = changerOrdre(x, y, z, w);
+                bas = ChangerOrdre(x, y, z, w);
 
                 //redonner le nouvel ordre des nombres
                 tableau[0, colone] = bas[3];
@@ -145,7 +145,7 @@ namespace _2048_test
         }
 
         //fonction déplacer les chiffres en haut
-        static int[,] haut(int[,] tableau)
+        static int[,] Haut(int[,] tableau)
         {
             int x, y, z, w;             //variable de position
             int[] haut = new int[4];
@@ -160,7 +160,7 @@ namespace _2048_test
                 w = tableau[3, colone];
 
                 //changer l'ordre des numéros
-                haut = changerOrdre(x, y, z, w);   //haut[] veut dire qu'on parle d'une case en particulier,  pour tout le tableau on ne met pas [].
+                haut = ChangerOrdre(x, y, z, w);   //haut[] veut dire qu'on parle d'une case en particulier,  pour tout le tableau on ne met pas [].
 
                 //redonner le nouvel ordre des nombres
                 tableau[0, colone] = haut[0];
@@ -175,7 +175,7 @@ namespace _2048_test
         }
 
         //fonction déplacer les chiffres à droite
-        static int[,] droite(int[,] tableau)
+        static int[,] Droite(int[,] tableau)
         {
             int x, y, z, w;                 //variable de position
             int[] droite = new int[4];
@@ -190,7 +190,7 @@ namespace _2048_test
                 w = tableau[ligne, 0];
 
                 //changer l'ordre des numéros
-                droite = changerOrdre(x, y, z, w);
+                droite = ChangerOrdre(x, y, z, w);
 
                 //redonner le nouvel ordre des nombres
                 tableau[ligne, 0] = droite[3];
@@ -204,7 +204,7 @@ namespace _2048_test
         }
 
         //fonction déplacer les chiffres à gauche
-        static int[,] gauche(int[,] tableau)
+        static int[,] Gauche(int[,] tableau)
         {
             int x, y, z, w;                 //variable de position
             int[] gauche = new int[4];
@@ -218,7 +218,7 @@ namespace _2048_test
                 w = tableau[ligne, 3];
 
                 //changer l'ordre des numéros
-                gauche = changerOrdre(x, y, z, w);
+                gauche = ChangerOrdre(x, y, z, w);
 
                 //redonner le nouvel ordre des nombres
                 tableau[ligne, 0] = gauche[0];
@@ -233,7 +233,7 @@ namespace _2048_test
 
 
         //Fonction qui change l'ordre des nombres à gauche
-        static int[] changerOrdre(int nb0, int nb1, int nb2, int nb3)
+        static int[] ChangerOrdre(int nb0, int nb1, int nb2, int nb3)
         {
 
             //interchanger deux valeurs numérique si un 0 est présent dans les valeurs
@@ -293,7 +293,7 @@ namespace _2048_test
         }
 
         //fonction générer un nombre aléatoire dans le tableau
-        static void aleatoire(int[,] tableau)
+        static void Aleatoire(int[,] tableau)
         {
             int ligne = tableau.GetLength(0);   //longueur de la dimmension x du tableau
             int colone = tableau.GetLength(1);  //longueur de la dimmension y du tableau
@@ -320,12 +320,12 @@ namespace _2048_test
             //le chiffre écrasé n'est pas un 0 alors on recommence au début de la fonction
             else
             {
-                aleatoire(tableau);
+                Aleatoire(tableau);
             }
         }
 
         //méthode qui controle si deux nombre sont identique
-        static bool controlePerdu(int nb0, int nb1, int nb2, int nb3)
+        static bool ControlePerdu(int nb0, int nb1, int nb2, int nb3)
         {
             if (nb0 == nb1)
             {
@@ -346,7 +346,7 @@ namespace _2048_test
         }
 
         // Fonction booléenne qui controle s'il reste un 0 dans le tableau ou si il y a un chiffre a 2028 ou s'il ont a perdu la game (plus de mouvements possible)
-        static bool controle(int[,] tableau)
+        static bool Controle(int[,] tableau)
         {
             int ligne = tableau.GetLength(0);  //longueur de la dimmension x du tableau
             int colone = tableau.GetLength(1);  //longueur de la dimmension y du tableau
@@ -377,12 +377,12 @@ namespace _2048_test
                     }
                 }
                 //controle si deux nombres dans une ligne sont identique
-                if (controlePerdu(tableau[i, 0], tableau[i, 1], tableau[i, 2], tableau[i, 3]))
+                if (ControlePerdu(tableau[i, 0], tableau[i, 1], tableau[i, 2], tableau[i, 3]))
                 {
                     return true; //permet de continuer à jouer
                 }
                 //contrôle si deux nombres sont identique dans une colone
-                if (controlePerdu(tableau[0, i], tableau[1, i], tableau[2, i], tableau[3, i]))
+                if (ControlePerdu(tableau[0, i], tableau[1, i], tableau[2, i], tableau[3, i]))
                 {
                     return true; //permet de continuer à jouer
                 }
@@ -409,7 +409,7 @@ namespace _2048_test
                 for (int j = 0; j < colone; j++)
                 {
                     // Mettre le chiffre en couleur
-                    Console.ForegroundColor = couleur(tableau[i, j]);
+                    Console.ForegroundColor = Couleur(tableau[i, j]);
                     // Afficher la valeur à la position (i, j)
                     Console.Write(tableau[i, j] + "\t");
                     // Mettre par défaut la couleur du texte (en blanc)
@@ -417,8 +417,8 @@ namespace _2048_test
                 }
 
                 // Passer à la ligne suivante après chaque ligne du tableau
-                Console.WriteLine();
-                Console.WriteLine();
+                Console.WriteLine("\n");
+              
             }
 
             //Afficher le score
@@ -427,7 +427,7 @@ namespace _2048_test
         }
 
         //Méthode pour afficher les chiffres de la grilles en couleur
-        static ConsoleColor couleur (int chiffre)
+        static ConsoleColor Couleur (int chiffre)
         {
             switch (chiffre)
             {
